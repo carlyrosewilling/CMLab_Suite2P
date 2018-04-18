@@ -6,19 +6,19 @@ file_specifier;
 
 %------Path to make_db file------%
 %General path to Data, MATLAB scripts, OASIS toolbox
-addpath(genpath(fullfile(ops0.driveletter, ops0.drivefolder, ops0.expfolder, ops0.matlabfolder, ops0.suite2pcontaining)));
+addpath(genpath(fullfile(ops0.driveletter, ops0.drivefolder, ops0.expfolder, ops0.matlabfolder, ops0.suite2pfolder)));
 make_db; %run DB file here -- instructions/options for DB are in make_db
          %DB's can be numbered so that each day a unique DB is made
 
 %------Paths to Suite2P Toolbox and OASIS------%
-ops0.toolbox_path = fullfile(ops0.driveletter, ops0.drivefolder, ops0.expfolder, ops0.matlabfolder, ops0.suite2pcontaining);
+ops0.toolbox_path = fullfile(ops0.driveletter, ops0.drivefolder, ops0.expfolder, ops0.matlabfolder, ops0.suite2pfolder);
 if exist(ops0.toolbox_path, 'dir')
 	addpath(genpath(ops0.toolbox_path)); %path to toolbox
 else
 	error('toolbox_path does not exist, please change toolbox_path');
 end
 
-addpath(genpath(fullfile(ops0.driveletter, ops0.drivefolder, ops0.expfolder, ops0. matlabfolder, ops0.suite2pcontaining, ops0.oasispath))); %Path to OASIS
+addpath(genpath(fullfile(ops0.driveletter, ops0.drivefolder, ops0.expfolder, ops0. matlabfolder, ops0.oasispath))); %Path to OASIS
 
 %% Setting Options
     %Note: If you want to use L0 spike deconv, you must load mex file via the following line

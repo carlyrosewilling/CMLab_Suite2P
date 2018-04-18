@@ -9,7 +9,6 @@ ops0.datafolder = 'DATA';
 ops0.planesfolder = 'Registered_Planes';
 ops0.tifffolder = 'Registered_Tiffs';
 ops0.matlabfolder = 'MATLAB';
-ops0.suite2pcontaining = 'Customized-Suite2P';
 ops0.suite2pfolder = 'Suite2P-master';
 ops0.oasispath = 'OASIS_matlab-master';
 

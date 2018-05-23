@@ -30,6 +30,7 @@ for i = 1:time
     averageneuropil(i) = mean(Nspikes(:,i));
 end
 
+figure;
 subplot(2,1,1)
 plot(averagecalcium)
 axis([0 time min(averagecalcium)-5 max(averagecalcium)+5]);

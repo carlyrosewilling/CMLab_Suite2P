@@ -1,7 +1,4 @@
 function [y, s] = read_patterned_tifdata(s, frames)
-
-%%% Written by D. Greenberg | github.com/dgreenberg/read_patterned_tifdata
-
 %read_patterned_tifdata
 %Read data from a tif file with a repeating structure, by guessing the location of each frame's data.
 %This function only works with multipage tifs that have the same amount of data for each image,

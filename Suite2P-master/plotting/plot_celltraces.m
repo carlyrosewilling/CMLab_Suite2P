@@ -5,7 +5,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-----------------Written by: Carly Rose Willing-----------------%
 
-function subplots(dat, active)
+function plot_celltraces(dat, active)
 %Input must be F*.mat data structure obtained from registration
 
 %For some reason, sometimes MATLAB/Suite2P decides that the dat structure

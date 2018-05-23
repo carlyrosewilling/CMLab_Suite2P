@@ -17,8 +17,7 @@ warningsBackOn = onCleanup(...
   @() warning('on', 'MATLAB:imagesci:tiffmexutils:libtiffWarning'));
 
 if ischar(tiff)
-  tiff = Tiff(tiff, 'r');
-  closeTiff = onCleanup(@() close(tiff));
+  [tiff tifinfo] = read_patterned_tifdata(tiff);
 end
 
 if nargin < 2
@@ -26,49 +25,26 @@ if nargin < 2
 end
 
 if nargin < 3
-  lastIdx = img.nFrames(tiff);
+  lastIdx = tifinfo.nframes; 
 end
 
 if nargin < 4
   stride = 1;
 end
 
-if nargout > 1
-  loadHeaders = true;
-else
-  loadHeaders = false;
-end
 
-w = tiff.getTag('ImageWidth');
-h = tiff.getTag('ImageLength');
-dataClass = class(read(tiff));
+
+w = tifinfo.tifinfo.ImageWidth;
+h = tifinfo.tifinfo.ImageLength; 
+dataClass = 'int16';
 nFrames = ceil((lastIdx - firstIdx + 1)/stride);
+frameIndex = firstIdx:stride:lastIdx;
 frames = zeros(h, w, nFrames, dataClass);
-if loadHeaders
-  headers = cell(1, nFrames);
-end
 
-nMsgChars = 0;
-setDirectory(tiff, firstIdx);
+
 for t = 1:nFrames
-  if mod(t, 100) == 0
-    %nMsgChars = overfprintf(nMsgChars, '%i/%i', t, nFrames);
-  end
-  
-  
-  frames(:,:,t) = read(tiff);
-  
-  if loadHeaders
-    headers{t} = getTag(tiff, 'ImageDescription');
-  end
-  
-  if t < nFrames
-    for i = 1:stride
-      nextDirectory(tiff);
-    end
-  end
-end
-%overfprintf(initChars + nMsgChars, '');
+        frames(:,:,t) = tiff(:,:,frameIndex(t));
+end 
 
 end
 

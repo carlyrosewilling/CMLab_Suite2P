@@ -4,7 +4,7 @@ function [frames, headers] = loadFramesBuff(tiff, firstIdx, lastIdx, stride, tem
 %   frames from the Tiff file specified by TIFF, which should be a filename
 %   or an already open Tiff object. Optionallly FIRST, LAST and STRIDE
 %   specify the range of frame indices to load.
-
+firstIdx = firstIdx + 2; %Removes the first 2 frames from each video due to problems with recording.
 if nargin>4 && ~isempty(temp_file)
     if ~isequal(tiff, temp_file) % do not copy if already copied
         % in case copying fails (server hangs)
@@ -44,11 +44,11 @@ if ischar(tiff)
 end
 
 if nargin < 2 || isempty(firstIdx)
-    firstIdx = 1;
+    firstIdx = 3;
 end
 
 if nargin < 3 || isempty(lastIdx)
-    lastIdx = tifinfo.nframes - firstIdx 
+    lastIdx = tifinfo.nframes;
 end
 
 if nargin < 4 || isempty(stride)

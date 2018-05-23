@@ -1,11 +1,20 @@
-function saveDir = batchAnalysis(ops, active)
+function saveDir = batchAnalysis(ops, processed, active)
 %Batch analysis of outputs from Suite2P
+%ops = 'regops.mat' file output by Suite2P
+%processed = 'Y' if _proc file exists i.e. already used GUI to process, 'N'
+%otherwise
+%active = 1 if you want to include only active cells, 0 if you want to
+%include all cells
 
 warning ('off','all'); %Turn off warnings because they get annoying (Eventually turn off specific warnings)
 ops = ops{1};
 base2 = fullfile(ops.ResultsSavePath);
 %base2 = uigetdir;   %Get user input for directory location
-matNames = dir(fullfile(base2,'*_proc.mat'));    %Find all matfiles in the folder
+if processed == 'Y'
+    matNames = dir(fullfile(base2,'*_proc.mat'));    %Find all matfiles in the folder that are processed
+else
+    matNames = dir(fullfile(base2, 'F*.mat'));
+end 
 matNames = rmfield(matNames,{'date' 'bytes' 'isdir' 'datenum'});
 errCount = 0;   %initiliaze number of errors
 errorLog = [];  %initilize error log
@@ -18,6 +27,9 @@ for i = 1:length(matNames)
         close all
         fullFileN = fullfile(matNames(i).folder,matNames(i).name);  %Get full file path
         load(fullFileN,'dat')  %Load necessary files from Suite2P mat file
+        if exist('dat', 'var') == 0
+            dat = load(fullFileN);
+        end 
         stat = dat.stat; %Converts from Suite2p output structure to easily accessible structure
         ops = dat.ops;
         Fcell = dat.Fcell{1};

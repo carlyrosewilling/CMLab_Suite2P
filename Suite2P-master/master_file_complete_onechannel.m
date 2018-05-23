@@ -7,7 +7,7 @@ file_specifier;
 %------Path to make_db file------%
 %General path to Data, MATLAB scripts, OASIS toolbox
 addpath(genpath(fullfile(ops0.driveletter, ops0.drivefolder, ops0.expfolder, ops0.matlabfolder, ops0.suite2pfolder)));
-make_db; %run DB file here -- instructions/options for DB are in make_db
+make_db_onechannel; %run DB file here -- instructions/options for DB are in make_db
          %DB's can be numbered so that each day a unique DB is made
 
 %------Paths to Suite2P Toolbox and OASIS------%
@@ -26,7 +26,7 @@ addpath(genpath(fullfile(ops0.driveletter, ops0.drivefolder, ops0.expfolder, ops
 
 ops0.useGPU                 = 1; % Set to 1 to accelerate registration: Nvidia GPU only, other GPUs won't work
 ops0.fig                    = 1; %1 to generate figure, 0 to turn off  
-ops0.diameter               = 12; %MOST IMPORTANT PARAMETER. Set here, or individually per experiment in make_db file
+ops0.diameter               = 13; %MOST IMPORTANT PARAMETER. Set here, or individually per experiment in make_db file
 ops0.nplanes                = 1; %number of planes to be processed
 
 %------Root Paths for Files and Temporary Storage------
@@ -44,14 +44,14 @@ ops0.DeleteBin              = 0; % set to 1 to delete binarys after registration
 ops0.ResultsSavePath        = fullfile(ops0.driveletter, ops0.drivefolder, ops0.expfolder, ops0.datafolder, ops0.planesfolder); %where to save data results (i.e. F*.mat file)
 ops0.RegFileTiffLocation    = fullfile(ops0.driveletter, ops0.drivefolder, ops0.expfolder, ops0.datafolder, ops0.tifffolder); %where to save registered tiffs 
                                             % leave empty to NOT save registered tiffs
-addpath(ops0.RegFileRoot);
+%addpath(ops0.RegFileRoot);
 %------Registration Options------
 ops0.doRegistration         = 1; %set to 0 to NOT run registration, if registration is already done
 ops0.getROIs                = 1; %set to 0 if you ONLY want to register
 ops0.showTargetRegistration = 1; %shows the mean image targets for all planes to be registered
 ops0.PhaseCorrelation       = 1; %set to 0 for non-whitened cross-correlation
 ops0.SubPixel               = Inf; %2 is alignment by 0.5 pixel, Inf is the exact number from phase correlation
-ops0.NimgFirstRegistration  = 1000; %number of images to include in the first registration pass 
+ops0.NimgFirstRegistration  = 500; %number of images to include in the first registration pass 
 ops0.nimgbegend             = 0; %frames to average at beginning and end of blocks
 ops0.dobidi                 = 1; %1 to infer and apply bidirectional phase offset
 %ops0.BiDiPhase              = ; %value of bidirectional phase offset to use for computation-- only if not using dobidi=1
@@ -86,17 +86,17 @@ ops0.imageRate              = 30;  %approximate imaging rate in Hz
 ops0.sensorTau              = 0.5; %approximate decay half-life (or timescale
 
 %------IF YOU HAVE RED CHANNEL------
-ops0.AlignToRedChannel      = 1; %set to 1 to register movement to red channel
-ops0.REDbinary              = 1; %set to 1 to make a binary file of registered red frames
+ops0.AlignToRedChannel      = 0; %set to 1 to register movement to red channel
+ops0.REDbinary              = 0; %set to 1 to make a binary file of registered red frames
     %if db.expred, then compute mean image for green experiments with red
     %channel available while doing registration
-ops0.redMeanImg             = 1; %(cell detection) if 1, will output mimgRED in ops data struc
-ops0.redthres               = 1.35; %(cell detection) the higher the thres the less red cells
-ops0.redmax                 = 1; %(cell detection)the higher the max the more NON-red cells
+ops0.redMeanImg             = 0; %(cell detection) if 1, will output mimgRED in ops data struc
+ops0.redthres               = 0; %(cell detection) the higher the thres the less red cells
+ops0.redmax                 = 0; %(cell detection)the higher the max the more NON-red cells
 
 %------Finalize Settings------
 db0 = db;
-%db0.expred                  = db0.expts; %needed to fix weird glitch in make_db
+
 
 %% --- RUN THE PIPELINE --- %% 
 

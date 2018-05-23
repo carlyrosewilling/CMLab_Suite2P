@@ -11,6 +11,6 @@ for i = 1:length(filelist)
     clear data
 end
 
-figure; hold on; for i = 1:8; plot(filelist(i).stats.pdist_hist(:,1),filelist(i).stats.pdist_hist(:,2));end; hold off
-figure; hold on; for i = 9:14; plot(filelist(i).stats.pdist_hist(:,1),filelist(i).stats.pdist_hist(:,2));end; hold off
+%figure; hold on; for i = 1:8; plot(filelist(i).stats.pdist_hist(:,1),filelist(i).stats.pdist_hist(:,2));end; hold off
+%figure; hold on; for i = 9:14; plot(filelist(i).stats.pdist_hist(:,1),filelist(i).stats.pdist_hist(:,2));end; hold off
     
